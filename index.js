@@ -1,4 +1,4 @@
-const newHTML = require('./src/newHTML');
+const render = require('./lib/Renderer');
 const fs = require('fs');
 const inquire = require('inquirer');
 
@@ -159,7 +159,7 @@ const newEmployee = () => {
             default: false
         }
     ]).then(employeeInfo => {
-        let {name, id, role, github, school, confirmNewEmployee} = employeeInfo;
+        let {name, id, role, email, github, school, confirmNewEmployee} = employeeInfo;
         let employee;
 
         if (role === "Engineer") {
@@ -198,7 +198,7 @@ const writeFile = data => {
 newManager()
 .then(newEmployee)
 .then(teamArr => {
-    return newHTML(teamArr);
+    return render(teamArr);
 
 }).then(newPageHTML => {
     return writeFile(newPageHTML);
